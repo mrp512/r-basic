@@ -110,7 +110,7 @@ round(sqrt(2), 4)^2
 2^50
 print(2^50, 15)
 print(2^50, 2)
-print(pi, 22)
+print(pi, 22) # R trabaja como máximo con 16 cifras decimales, todas las demás son inexactas
 #3.141592653589793115998
 #3.141592653589793238462
 
