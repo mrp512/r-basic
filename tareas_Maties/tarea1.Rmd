@@ -1,0 +1,87 @@
+---
+title: "Tarea 1"
+author: "Matías Reus Pons"
+date: "24/10/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Pregunta 1
+
+Si hubiéramos empezado a contar segundos a partir de las 12 campanadas que marcan el inicio de 2018, ¿a qué hora de qué día de qué año llegaríamos a los 250 millones de segundos? ¡Cuidado con los años bisiestos!
+
+```{r}
+# Definimos segundos por minuto, hora, día, año, y cuatro años (considerando uno bisiesto)
+s_min=60
+s_hora=s_min*60
+s_dia=s_hora*24
+s_ano=s_dia*365
+s_4anos=4*s_ano+s_dia
+# Al cabo de cuatro años, han transcurrido 126,230,400 segundos
+
+# Ahora vayamos repartiendo poco a poco 250 millones de segundos en los grupos predefinidos:
+c1=250000000%/%s_4anos # 1 vez cuatro años (1 de enero de 2022)
+r1=250000000%%s_4anos # sobran 123,769,600 segundos
+
+c2=r1%/%s_ano # más 3 años (1 de enero de 2025)
+r2=r1%%s_ano # sobran 29,161,600 segundos
+
+c3=r2%/%s_dia # más 337 días
+r3=r2%%s_dia # sobran 44,800 segundos
+
+# ¿Qué día es el 337 al cabo del año?
+# 337-31-28-31-30-31-30-31-31-30-31-30 # llegamos a 1 de diciembre y sobran 3 días
+# es día 4 de diciembre de 2025
+
+c4=r3%/%s_hora # más 12 horas (12.00pm)
+r4=r3%%s_hora # sobran 1,600 segundos
+
+c5=r4%/%s_min # más 26 minutos
+r5=r4%%s_min # sobran 40 segundos
+
+# Comprobación:
+60*60*24*365*4+60*60*24+60*60*24*365*3+60*60*24*337+60*60*12+60*26+40
+
+# Resultado: 
+# Habrán transcurrido 250 millones de segundos día 4 de diciembre de 2025 a las 12:26:40
+```
+
+# Pregunta 2
+
+Cread una función que os resuelva una ecuación de primer grado (de la forma Ax+B=0). Es decir, vosotros tendréis que introducir como parámetros los coeficientes (en orden) y la función os tiene que devolver la solución. Por ejemplo, si la ecuación es 2x+4=0, vuestra función os tendría que devolver -2.
+
+Una vez creada la función, utilizadla para resolver las siguientes ecuaciones de primer grado:
+
+5x+3=0
+
+7x+4 = 18
+
+x+1 = 1
+
+```{r}
+# Ecuación tipo A*x + B = C, por tanto x = (C - B) / A
+resol_ec = function(a, b, c) {
+  (c-b)/a
+}
+resol_ec(5, 3, 0)
+resol_ec(7, 4, 18)
+resol_ec(1, 1, 1)
+```
+
+# Pregunta 3
+
+Dad una expresión para calcular 3e-π y a continuación, dad el resultado que habéis obtenido con R redondeado a 3 cifras decimales.
+
+Dad el módulo del número complejo (2+3i)^2/(5+8i) redondeado a 3 cifras decimales.
+
+```{r}
+# 3e-pi
+round(3*exp(1)-pi,3)
+
+# (2+3i)^2/(5+8i)
+round(Mod((2+3i)^2/(5+8i)),3)
+```
+
